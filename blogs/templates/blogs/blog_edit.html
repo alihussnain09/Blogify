@@ -1,0 +1,33 @@
+{% extends 'blogs/base/base.html' %}
+
+{% load static %}
+
+{% block style_css %} 
+<link rel="stylesheet" href="{% static 'blogs/styles/blog_edit.css' %}">
+{% endblock %}
+
+{% block title %}Edit Blog{% endblock %}
+
+
+
+{% block body %}
+{% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    <div class="container">
+        <h1>Edit Blog: {{ blog.title }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
+        <a href="{% url 'blog_detail' blog.pk %}" class="back-button">Back to Blog Details</a>
+    </div>
+{% endblock %}

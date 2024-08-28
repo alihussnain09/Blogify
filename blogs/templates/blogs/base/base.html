@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Blog{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'blogs/styles/base.css' %}">
+    {% block style_css %}
+    
+    {% endblock %}
+
+    {% block script %}
+
+    {% endblock %}
+
+    <!-- Add this in your base template inside the <head> tag -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'blog_list' %}">All Blogs</a></li>
+                <li><a href="{% url 'create_blog' %}">Create Blog</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout_page' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login_page' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+
+    <!-- <footer>
+        <p>My Blogs</p>
+    </footer> -->
+</body>
+</html>
